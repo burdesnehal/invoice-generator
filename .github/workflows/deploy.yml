@@ -32,7 +32,7 @@ jobs:
         run: tar -C ${{ env.OUTPUT_DIR }} -czf artifact.tar.gz .
 
       - name: Copy Artifact to EC2
-        uses: appleboy/[email protected]
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_SSH_USER }}
@@ -42,7 +42,7 @@ jobs:
           target: "/home/${{ secrets.EC2_SSH_USER }}/artifact.tar.gz"
 
       - name: Deploy on EC2
-        uses: appleboy/[email protected]
+        uses: appleboy/ssh-action@v1.0.4
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_SSH_USER }}
